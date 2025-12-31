@@ -1,0 +1,11 @@
+# Heimdall AI Personal Assistant
+# Basic requirements for the core persona implementation
+
+# Core Python dependencies (using standard library for minimal implementation)
+# No external dependencies required for basic persona functionality
+
+# Optional dependencies for future enhancements:
+# openai>=1.0.0        # For OpenAI API integration
+# anthropic>=0.7.0     # For Anthropic Claude API integration
+# requests>=2.31.0     # For API calls
+# python-dotenv>=1.0.0 # For environment variable management
