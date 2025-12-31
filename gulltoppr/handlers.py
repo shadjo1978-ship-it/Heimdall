@@ -66,139 +66,88 @@ class ResponseHandler:
         sorted_actions = sorted(actions, key=lambda a: a.priority, reverse=True)
         return [self.execute(action) for action in sorted_actions]
     
+    def _build_response(self, action: ResponseAction, message: str, 
+                       status: str = "success") -> Dict[str, Any]:
+        """
+        Build a standardized response dictionary.
+        
+        Args:
+            action: The ResponseAction being processed
+            message: Human-readable message describing the result
+            status: Status of the execution (default: "success")
+            
+        Returns:
+            Standardized response dictionary
+        """
+        return {
+            "status": status,
+            "action_type": action.action_type.value,
+            "message": message,
+            "data": action.payload
+        }
+    
     # Handler methods for each action type
     
     def _handle_voice_response(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle voice response action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Voice response prepared",
-            "data": action.payload
-        }
+        return self._build_response(action, "Voice response prepared")
     
     def _handle_text_to_speech(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle text-to-speech conversion action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Text converted to speech",
-            "data": action.payload
-        }
+        return self._build_response(action, "Text converted to speech")
     
     def _handle_text_response(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle text response action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Text response generated",
-            "data": action.payload
-        }
+        return self._build_response(action, "Text response generated")
     
     def _handle_formatted_response(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle formatted response action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Formatted response generated",
-            "data": action.payload
-        }
+        return self._build_response(action, "Formatted response generated")
     
     def _handle_real_time_thinking(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle real-time thinking action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Real-time thinking process initiated",
-            "data": action.payload
-        }
+        return self._build_response(action, "Real-time thinking process initiated")
     
     def _handle_background_processing(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle background processing action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Background processing started",
-            "data": action.payload
-        }
+        return self._build_response(action, "Background processing started")
     
     def _handle_firewall_block(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle firewall block action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Firewall block applied",
-            "data": action.payload
-        }
+        return self._build_response(action, "Firewall block applied")
     
     def _handle_firewall_allow(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle firewall allow action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Firewall allow rule applied",
-            "data": action.payload
-        }
+        return self._build_response(action, "Firewall allow rule applied")
     
     def _handle_security_alert(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle security alert action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Security alert triggered",
-            "data": action.payload
-        }
+        return self._build_response(action, "Security alert triggered")
     
     def _handle_web_search(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle web search action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Web search initiated",
-            "data": action.payload
-        }
+        return self._build_response(action, "Web search initiated")
     
     def _handle_database_query(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle database query action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Database query executed",
-            "data": action.payload
-        }
+        return self._build_response(action, "Database query executed")
     
     def _handle_api_call(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle API call action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "API call executed",
-            "data": action.payload
-        }
+        return self._build_response(action, "API call executed")
     
     def _handle_no_action(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle no action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "No action required",
-            "data": {}
-        }
+        return self._build_response(action, "No action required")
     
     def _handle_error_response(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle error response action."""
-        return {
-            "status": "error",
-            "action_type": action.action_type.value,
-            "message": "Error occurred",
-            "data": action.payload
-        }
+        # Extract error details from payload for better error messages
+        error_msg = action.payload.get('message', 'Error occurred')
+        if 'error_code' in action.payload:
+            error_msg = f"{action.payload['error_code']}: {error_msg}"
+        return self._build_response(action, error_msg, status="error")
     
     def _handle_redirect(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle redirect action."""
-        return {
-            "status": "success",
-            "action_type": action.action_type.value,
-            "message": "Redirect initiated",
-            "data": action.payload
-        }
+        return self._build_response(action, "Redirect initiated")
