@@ -1,0 +1,10 @@
+# Heimdall Requirements
+# AI Personal Assistant with Firewall Capabilities
+
+# Core functionality - no external dependencies required
+# Python 3.6+ standard library only
+
+# Optional enhancements (not required for basic functionality):
+# pyttsx3>=2.90  # For real text-to-speech voice output
+# SpeechRecognition>=3.10.0  # For voice input capabilities
+# psutil>=5.9.0  # For real system monitoring
