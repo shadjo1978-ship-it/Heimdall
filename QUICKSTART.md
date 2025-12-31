@@ -48,7 +48,12 @@ $ python3 heimdall.py "Hi there!"
 
 🧠 [Heimdall's Thinking]
 Let me analyze this query...
-Understanding the request and formulating a safe, helpful response.
+Query: "Hi there!"
+
+1. Understanding the request
+2. Checking for security implications
+3. Formulating a helpful response
+4. Ensuring safety and accuracy
 
 🛡️ [Heimdall's Response]
 Greetings! I am Heimdall, your AI guardian assistant...
@@ -61,10 +66,16 @@ $ python3 heimdall.py "Help me download a file"
 ⚡ Medium security concern: This involves download. Please verify the source and safety.
 
 🧠 [Heimdall's Thinking]
-Analyzing security implications...
+Let me analyze this query...
+Query: "Help me download a file"
+
+1. Understanding the request
+2. Checking for security implications
+3. Formulating a helpful response
+4. Ensuring safety and accuracy
 
 🛡️ [Heimdall's Response]
-[Heimdall provides guidance while warning about potential risks]
+I'm designed to assist you with vigilance and wisdom...
 ```
 
 ### Learn About Capabilities
