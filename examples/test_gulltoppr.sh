@@ -17,7 +17,7 @@ NC='\033[0m' # No Color
 # Configuration
 GULLTOPPR_URL="${GULLTOPPR_URL:-http://localhost:8080}"
 TEST_CONTRACT="${1:-0xdac17f958d2ee523a2206206994597c13d831ec7}" # USDT by default
-RPC_URL="${2:-eth.llamarpc.com}"
+RPC_URL="${2:-https://eth.llamarpc.com}"
 
 # Function to check if Gulltoppr is running
 check_service() {
@@ -98,7 +98,7 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     echo
     echo "Arguments:"
     echo "  contract_address  Ethereum contract address (default: USDT)"
-    echo "  rpc_url          RPC endpoint URL (default: eth.llamarpc.com)"
+    echo "  rpc_url          RPC endpoint URL (default: https://eth.llamarpc.com)"
     echo
     echo "Environment variables:"
     echo "  GULLTOPPR_URL    Gulltoppr service URL (default: http://localhost:8080)"
@@ -106,7 +106,7 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     echo "Examples:"
     echo "  $0"
     echo "  $0 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-    echo "  $0 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 eth.llamarpc.com"
+    echo "  $0 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 https://eth.llamarpc.com"
     echo "  GULLTOPPR_URL=http://gulltoppr:8080 $0"
     exit 0
 fi

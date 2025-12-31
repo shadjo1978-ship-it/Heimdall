@@ -99,7 +99,7 @@ Hello from Gulltoppr!
 **Example:**
 ```bash
 # Analyze a contract on Ethereum mainnet
-curl "http://localhost:8080/0x1234567890123456789012345678901234567890?rpc_url=eth.llamarpc.com"
+curl "http://localhost:8080/0x1234567890123456789012345678901234567890?rpc_url=https://eth.llamarpc.com"
 ```
 
 **Response:**
@@ -130,14 +130,14 @@ The `gulltoppr-config.json` file contains integration settings:
 
 - **enabled**: Enable/disable Gulltoppr integration (boolean)
 - **service_url**: URL where Gulltoppr is running (string)
-- **default_rpc_url**: Default Ethereum RPC provider (string)
+- **default_rpc_url**: Default Ethereum RPC provider with protocol (string, e.g., `https://eth.llamarpc.com`)
 - **timeout**: Request timeout in milliseconds (number)
 
 ### Popular RPC Providers
 
-- `eth.llamarpc.com` - LlamaNodes (free)
-- `rpc.ankr.com/eth` - Ankr
-- `cloudflare-eth.com` - Cloudflare
+- `https://eth.llamarpc.com` - LlamaNodes (free)
+- `https://rpc.ankr.com/eth` - Ankr
+- `https://cloudflare-eth.com` - Cloudflare
 - Your own Infura/Alchemy endpoint
 
 ## Use Cases
@@ -147,7 +147,7 @@ The `gulltoppr-config.json` file contains integration settings:
 Analyze contracts for security vulnerabilities before interaction:
 
 ```bash
-curl "http://localhost:8080/0xContractAddress?rpc_url=eth.llamarpc.com"
+curl "http://localhost:8080/0xContractAddress?rpc_url=https://eth.llamarpc.com"
 ```
 
 ### 2. ABI Discovery
@@ -155,7 +155,7 @@ curl "http://localhost:8080/0xContractAddress?rpc_url=eth.llamarpc.com"
 Automatically generate ABIs for contracts without verified source code:
 
 ```bash
-curl "http://localhost:8080/0xUnverifiedContract?rpc_url=eth.llamarpc.com"
+curl "http://localhost:8080/0xUnverifiedContract?rpc_url=https://eth.llamarpc.com"
 ```
 
 ### 3. Contract Function Discovery

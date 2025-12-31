@@ -61,7 +61,7 @@ curl http://localhost:8080/
 
 **Generate ABI for a contract:**
 ```bash
-curl http://localhost:8080/0xYourContractAddress?rpc_url=eth.llamarpc.com
+curl http://localhost:8080/0xYourContractAddress?rpc_url=https://eth.llamarpc.com
 ```
 
 ### Configuration
@@ -69,7 +69,7 @@ curl http://localhost:8080/0xYourContractAddress?rpc_url=eth.llamarpc.com
 Gulltoppr settings can be customized in `gulltoppr-config.json`:
 
 - `service_url`: URL where Gulltoppr service is running (default: `http://localhost:8080`)
-- `default_rpc_url`: Default Ethereum RPC URL for contract queries (default: `eth.llamarpc.com`)
+- `default_rpc_url`: Default Ethereum RPC URL for contract queries (default: `https://eth.llamarpc.com`)
 - `timeout`: Request timeout in milliseconds (default: `30000`)
 
 ## License
