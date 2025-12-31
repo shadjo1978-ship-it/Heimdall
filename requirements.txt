@@ -1,0 +1,6 @@
+# No external dependencies required for basic functionality
+# Python 3.7+ standard library is sufficient
+
+# Optional dependencies for extended functionality:
+# watchdog>=2.1.0  # For file system monitoring
+# psutil>=5.8.0    # For system monitoring
