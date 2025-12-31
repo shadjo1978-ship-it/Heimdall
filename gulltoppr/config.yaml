@@ -1,0 +1,144 @@
+# Gulltoppr Response Actions Configuration
+# Configuration file for defining response action behaviors
+
+response_actions:
+  # Voice response settings
+  voice_response:
+    enabled: true
+    default_voice: "neural"
+    default_speed: 1.0
+    default_pitch: 1.0
+    max_response_length: 1000
+  
+  # Text-to-speech settings
+  text_to_speech:
+    enabled: true
+    engine: "auto"
+    cache_responses: true
+  
+  # Text response settings
+  text_response:
+    enabled: true
+    max_length: 2000
+    formatting: "plain"
+  
+  # Formatted response settings
+  formatted_response:
+    enabled: true
+    allowed_formats:
+      - "markdown"
+      - "html"
+      - "json"
+    max_length: 5000
+  
+  # Real-time thinking settings
+  real_time_thinking:
+    enabled: true
+    streaming: true
+    default_model: "gpt-4"
+    timeout_seconds: 30
+  
+  # Background processing settings
+  background_processing:
+    enabled: true
+    max_concurrent_tasks: 5
+    task_timeout_seconds: 300
+  
+  # Firewall block settings
+  firewall_block:
+    enabled: true
+    require_confirmation: false
+    max_duration: "24h"
+    default_duration: "1h"
+    log_actions: true
+  
+  # Firewall allow settings
+  firewall_allow:
+    enabled: true
+    require_confirmation: false
+    default_duration: "permanent"
+    log_actions: true
+  
+  # Security alert settings
+  security_alert:
+    enabled: true
+    severity_levels:
+      - "low"
+      - "medium"
+      - "high"
+      - "critical"
+    notification_channels:
+      - "email"
+      - "sms"
+      - "log"
+    auto_escalate: true
+  
+  # Web search settings
+  web_search:
+    enabled: true
+    search_engine: "auto"
+    max_results: 10
+    safe_search: true
+    timeout_seconds: 10
+  
+  # Database query settings
+  database_query:
+    enabled: true
+    allowed_operations:
+      - "SELECT"
+    max_results: 1000
+    timeout_seconds: 30
+    sanitize_queries: true
+  
+  # API call settings
+  api_call:
+    enabled: true
+    timeout_seconds: 15
+    max_retries: 3
+    allowed_methods:
+      - "GET"
+      - "POST"
+    rate_limiting: true
+  
+  # No action settings
+  no_action:
+    enabled: true
+  
+  # Error response settings
+  error_response:
+    enabled: true
+    include_stack_trace: false
+    log_errors: true
+  
+  # Redirect settings
+  redirect:
+    enabled: true
+    max_redirects: 5
+    timeout_seconds: 10
+
+# Priority settings
+priority:
+  min_priority: 0
+  max_priority: 10
+  default_priority: 5
+
+# Security settings
+security:
+  validate_payloads: true
+  sanitize_inputs: true
+  log_all_actions: true
+  require_authentication: true
+
+# Performance settings
+performance:
+  enable_caching: true
+  cache_ttl_seconds: 3600
+  max_concurrent_actions: 10
+  batch_processing_enabled: true
+
+# Logging settings
+logging:
+  level: "INFO"
+  format: "json"
+  include_metadata: true
+  retention_days: 30
