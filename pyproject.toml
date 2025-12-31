@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "heimdall"
 version = "0.1.0"
-description = "A.I personal assistant with real time thinking and voice also serves as a firewall"
+description = "AI personal assistant with real-time thinking and voice that also serves as a firewall"
 readme = "README.md"
 requires-python = ">=3.8"
 keywords = ["ai", "assistant", "firewall", "voice", "windows"]

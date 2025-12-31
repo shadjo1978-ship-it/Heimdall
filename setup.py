@@ -34,8 +34,8 @@ extras_require['all'] = [
 setup(
     name='heimdall',
     version='0.1.0',
-    description='A.I personal assistant with real time thinking and voice also serves as a firewall',
-    long_description=open('README.md').read(),
+    description='AI personal assistant with real-time thinking and voice that also serves as a firewall',
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     author='Heimdall Team',
     packages=find_packages(where='src'),
