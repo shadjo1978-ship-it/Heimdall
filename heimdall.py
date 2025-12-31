@@ -91,6 +91,10 @@ class Heimdall:
         "I see patterns forming...",
     ]
     
+    # Threat detection configuration
+    SUSPICIOUS_KEYWORDS = ['virus', 'malware', 'trojan', 'backdoor', 'exploit']
+    RANDOM_THREAT_PROBABILITY = 0.1  # 10% chance of detecting low-level threat
+    
     def __init__(self, voice_enabled: bool = True):
         """
         Initialize Heimdall.
@@ -118,6 +122,15 @@ class Heimdall:
             print(f"\n🔊 Heimdall: {message}")
         else:
             print(f"\nHeimdall: {message}")
+    
+    def speak(self, message: str) -> None:
+        """
+        Public interface for voice output.
+        
+        Args:
+            message: The message to speak
+        """
+        self._speak(message)
     
     def think_aloud(self, context: str) -> None:
         """
@@ -180,16 +193,14 @@ class Heimdall:
         Returns:
             Threat level (0-10, where 0 is safe)
         """
-        # Simple threat detection logic
-        suspicious_keywords = ['virus', 'malware', 'trojan', 'backdoor', 'exploit']
-        
+        # Check for suspicious keywords in item name
         item_name = item.get('name', '').lower()
-        for keyword in suspicious_keywords:
+        for keyword in self.SUSPICIOUS_KEYWORDS:
             if keyword in item_name:
                 return random.randint(7, 10)
         
         # Random low-level threats for demonstration
-        if random.random() < 0.1:  # 10% chance of low-level threat
+        if random.random() < self.RANDOM_THREAT_PROBABILITY:
             return random.randint(1, 3)
         
         return 0

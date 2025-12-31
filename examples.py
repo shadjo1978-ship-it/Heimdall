@@ -45,7 +45,7 @@ def example_custom_scan():
     if threats:
         heimdall.dispatch_gulltoppr(threats)
     else:
-        heimdall._speak("No threats in this dataset. Acceptable.")
+        heimdall.speak("No threats in this dataset. Acceptable.")
 
 
 def example_continuous_monitoring():
