@@ -1,0 +1,19 @@
+# Default configuration for Heimdall Assistant
+
+layers:
+  security:
+    enabled: true
+    blocked_patterns: []
+    rate_limit: 100
+    sanitize_input: true
+  
+  voice:
+    enabled: true
+    sample_rate: 16000
+    language: en-US
+  
+  thinking:
+    enabled: true
+    model: default
+    temperature: 0.7
+    real_time: true
