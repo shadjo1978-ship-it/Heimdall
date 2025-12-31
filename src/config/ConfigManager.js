@@ -57,7 +57,14 @@ class ConfigManager {
         format: 'json'
       },
       modules: {
-        storage: { enabled: true },
+        storage: { 
+          enabled: true,
+          cache: {
+            enabled: true,
+            ttl: 300,
+            cleanup: this.env !== 'test'  // Disable cleanup in test env
+          }
+        },
         firewall: { enabled: true },
         ai: { enabled: true },
         voice: { enabled: false },

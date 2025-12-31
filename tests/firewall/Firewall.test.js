@@ -98,9 +98,10 @@ describe('FirewallModule', () => {
 
     test('should enforce rate limiting', async () => {
       const requests = [];
+      const maxRequests = 5; // Matches the config
       
-      // Make requests up to the limit
-      for (let i = 0; i < 6; i++) {
+      // Make requests up to the limit + 1
+      for (let i = 0; i < maxRequests + 1; i++) {
         const result = await firewall.validateRequest({
           source: '192.168.1.1',
           content: 'Hello',
@@ -109,12 +110,12 @@ describe('FirewallModule', () => {
         requests.push(result);
       }
 
-      // First 5 should be allowed
-      expect(requests.slice(0, 5).every(r => r.allowed)).toBe(true);
+      // First maxRequests should be allowed
+      expect(requests.slice(0, maxRequests).every(r => r.allowed)).toBe(true);
       
-      // 6th should be rate limited
-      expect(requests[5].allowed).toBe(false);
-      expect(requests[5].reason).toBe('rate_limited');
+      // Last one should be rate limited
+      expect(requests[maxRequests].allowed).toBe(false);
+      expect(requests[maxRequests].reason).toBe('rate_limited');
     });
   });
 

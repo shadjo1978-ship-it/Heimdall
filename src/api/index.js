@@ -59,11 +59,16 @@ class APIModule extends BaseModule {
           return res.status(400).json({ error: 'Message is required' });
         }
 
+        // Get real IP address (considering proxies)
+        const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
+                        req.headers['x-real-ip'] || 
+                        req.ip;
+
         // Validate with firewall
         const firewall = this.application.getModule('firewall');
         if (firewall) {
           const validation = await firewall.validateRequest({
-            source: req.ip,
+            source: clientIp,
             content: message,
             userId
           });
@@ -169,15 +174,22 @@ class APIModule extends BaseModule {
     await super.stop();
 
     if (this.io) {
-      this.io.close();
+      await new Promise((resolve) => {
+        this.io.close(() => resolve());
+      });
     }
 
-    return new Promise((resolve) => {
-      this.server.close(() => {
-        this.logger.info('API server stopped');
-        resolve();
+    if (this.server) {
+      return new Promise((resolve) => {
+        this.server.close((err) => {
+          if (err && err.code !== 'ERR_SERVER_NOT_RUNNING') {
+            this.logger.warn('Error closing server', err);
+          }
+          this.logger.info('API server stopped');
+          resolve();
+        });
       });
-    });
+    }
   }
 }
 

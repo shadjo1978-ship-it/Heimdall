@@ -40,7 +40,8 @@ class StorageModule extends BaseModule {
    */
   createCache() {
     const ttl = this.getConfig('cache.ttl', 300);
-    return new InMemoryCache(ttl);
+    const enableCleanup = this.getConfig('cache.cleanup', true);
+    return new InMemoryCache(ttl, enableCleanup);
   }
 
   /**
@@ -117,6 +118,18 @@ class StorageModule extends BaseModule {
       throw error;
     }
   }
+
+  /**
+   * Stop the module and cleanup
+   */
+  async stop() {
+    await super.stop();
+    
+    // Cleanup cache interval
+    if (this.cache && this.cache.destroy) {
+      this.cache.destroy();
+    }
+  }
 }
 
 /**
@@ -166,9 +179,17 @@ class InMemoryDatabase {
  * In-Memory Cache
  */
 class InMemoryCache {
-  constructor(ttl = 300) {
+  constructor(ttl = 300, enableCleanup = true) {
     this.cache = new Map();
     this.ttl = ttl * 1000; // Convert to milliseconds
+    this.cleanupInterval = null;
+    
+    // Start cleanup interval (every 60 seconds) if enabled
+    if (enableCleanup) {
+      this.cleanupInterval = setInterval(() => {
+        this.cleanup();
+      }, 60000);
+    }
   }
 
   set(key, value) {
@@ -197,8 +218,24 @@ class InMemoryCache {
     this.cache.delete(key);
   }
 
+  cleanup() {
+    const now = Date.now();
+    for (const [key, item] of this.cache.entries()) {
+      if (now > item.expiry) {
+        this.cache.delete(key);
+      }
+    }
+  }
+
   clear() {
     this.cache.clear();
+  }
+
+  destroy() {
+    if (this.cleanupInterval) {
+      clearInterval(this.cleanupInterval);
+    }
+    this.clear();
   }
 }
 
