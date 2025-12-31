@@ -1,0 +1,26 @@
+# Windows-specific requirements for Heimdall
+# These are the base requirements for Windows platform
+
+# Windows-specific system APIs
+pywin32>=305
+
+# Build and packaging tools
+pyinstaller>=6.0.0
+setuptools>=61.0.0
+wheel>=0.41.0
+
+# Optional: Text-to-Speech and Voice Recognition
+# Uncomment if you need voice features:
+# pyttsx3>=2.90
+# SpeechRecognition>=3.10.0
+# pyaudio>=0.2.13
+
+# Optional: AI Integration
+# Uncomment if you need AI features:
+# openai>=1.0.0
+# anthropic>=0.7.0
+
+# Optional: Network/Firewall features
+# Uncomment if you need firewall features:
+# scapy>=2.5.0
+# Note: scapy on Windows requires Npcap: https://nmap.org/npcap/
