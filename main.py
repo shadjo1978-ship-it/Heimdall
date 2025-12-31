@@ -21,8 +21,14 @@ from handlers import (
 
 def setup_logging():
     """Configure logging for the application"""
+    try:
+        log_level = getattr(logging, Config.LOG_LEVEL.upper())
+    except AttributeError:
+        log_level = logging.INFO
+        print(f"Warning: Invalid log level '{Config.LOG_LEVEL}', defaulting to INFO")
+    
     logging.basicConfig(
-        level=getattr(logging, Config.LOG_LEVEL),
+        level=log_level,
         format=Config.LOG_FORMAT
     )
 
