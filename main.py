@@ -7,6 +7,7 @@ Main entry point for the malware detection listening service
 import logging
 import signal
 import sys
+import time
 from datetime import datetime
 
 from malware_listener import MalwareDetectionListener, MalwareDetection, DetectionSeverity
@@ -87,7 +88,6 @@ def main():
     # that monitors for actual malware detections
     try:
         while listener.is_running:
-            import time
             time.sleep(1)
     except KeyboardInterrupt:
         logger.info("Keyboard interrupt received")
