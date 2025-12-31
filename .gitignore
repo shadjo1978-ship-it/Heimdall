@@ -46,6 +46,8 @@ build/
 tmp/
 temp/
 *.tmp
+validate.js
+test-api.js
 
 # Cache
 .cache/

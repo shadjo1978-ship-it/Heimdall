@@ -138,7 +138,7 @@ class FirewallModule extends BaseModule {
     }
 
     // Basic SQL injection detection
-    if (/(\bor\b|\band\b).*=.*['"]|union\s+select/i.test(content)) {
+    if (/(\bor\b|\band\b)\s+\d+\s*=\s*\d+|union\s+select|'.*or.*=|".*or.*=/i.test(content)) {
       threats.push({ type: 'sql_injection', severity: 'high' });
     }
 
