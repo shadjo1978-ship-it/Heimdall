@@ -1,0 +1,50 @@
+{
+  "default_action": "deny",
+  "rules": [
+    {
+      "name": "allow_http",
+      "action": "allow",
+      "protocol": "tcp",
+      "dest_port": 80,
+      "priority": 10,
+      "enabled": true
+    },
+    {
+      "name": "allow_https",
+      "action": "allow",
+      "protocol": "tcp",
+      "dest_port": 443,
+      "priority": 10,
+      "enabled": true
+    },
+    {
+      "name": "allow_dns",
+      "action": "allow",
+      "protocol": "udp",
+      "dest_port": 53,
+      "priority": 10,
+      "enabled": true
+    },
+    {
+      "name": "block_local_network",
+      "action": "deny",
+      "source_ip": "192.168.0.0/16",
+      "priority": 20,
+      "enabled": true
+    }
+  ],
+  "blacklist": [
+    "10.0.0.1",
+    "172.16.0.1"
+  ],
+  "whitelist": [
+    "8.8.8.8",
+    "1.1.1.1"
+  ],
+  "blocked_ports": [
+    23,
+    21,
+    445
+  ],
+  "allowed_ports": []
+}
