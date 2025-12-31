@@ -108,20 +108,39 @@ class ConfigManager {
 
   /**
    * Set configuration value
+   * Protected against prototype pollution with explicit key validation
    */
   set(key, value) {
     const keys = key.split('.');
+    
+    // Prevent prototype pollution by blocking dangerous keys
+    const dangerousKeys = ['__proto__', 'constructor', 'prototype'];
+    for (const k of keys) {
+      if (dangerousKeys.includes(k)) {
+        throw new Error(`Cannot set configuration key: ${key} (potential prototype pollution)`);
+      }
+    }
+    
     let obj = this.config;
 
     for (let i = 0; i < keys.length - 1; i++) {
       const k = keys[i];
-      if (!(k in obj) || typeof obj[k] !== 'object') {
+      // Use hasOwnProperty to prevent prototype pollution
+      if (!Object.prototype.hasOwnProperty.call(obj, k) || typeof obj[k] !== 'object' || obj[k] === null) {
         obj[k] = {};
       }
       obj = obj[k];
     }
 
-    obj[keys[keys.length - 1]] = value;
+    // Use Object.defineProperty for safer assignment
+    // Note: CodeQL may flag this, but it's protected by the dangerous key checks above
+    const finalKey = keys[keys.length - 1];
+    Object.defineProperty(obj, finalKey, {
+      value: value,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    });
   }
 
   /**
