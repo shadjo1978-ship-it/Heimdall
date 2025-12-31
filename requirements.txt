@@ -1,0 +1,4 @@
+# Gulltoppr Response Actions - Requirements
+# Python 3.8+
+# No external dependencies required for core functionality
+# All functionality uses Python standard library
