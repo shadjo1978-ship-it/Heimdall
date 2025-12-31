@@ -254,7 +254,19 @@ class FirewallEngine:
         return False
     
     def allow_port(self, port: int) -> None:
-        """Allow a specific port"""
+        """
+        Allow a specific port (port allowlist mode).
+        
+        When allowed_ports is configured (non-empty), the firewall operates in
+        port allowlist mode: only packets destined to ports in this set are
+        allowed, all other ports are denied immediately.
+        
+        Note: Packets without a dest_port field will bypass this check and
+        proceed to rule evaluation.
+        
+        Args:
+            port: Port number to allow (0-65535)
+        """
         if not 0 <= port <= 65535:
             raise ValueError(f"Invalid port number: {port}")
         self.allowed_ports.add(port)
@@ -303,6 +315,10 @@ class FirewallEngine:
             return Action.DENY, f"Port {dest_port} is blocked"
         
         # Check allowed ports (if allowed_ports is configured)
+        # When allowed_ports is non-empty, it operates in allowlist mode:
+        # - Packets to ports in allowed_ports are immediately allowed
+        # - Packets to other ports are immediately denied
+        # - Packets without dest_port bypass this check and proceed to rules
         if self.allowed_ports and dest_port is not None:
             if dest_port in self.allowed_ports:
                 self.stats['allowed_packets'] += 1
