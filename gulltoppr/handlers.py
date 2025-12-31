@@ -143,9 +143,10 @@ class ResponseHandler:
     def _handle_error_response(self, action: ResponseAction) -> Dict[str, Any]:
         """Handle error response action."""
         # Extract error details from payload for better error messages
-        error_msg = action.payload.get('message', 'Error occurred')
-        if 'error_code' in action.payload:
-            error_msg = f"{action.payload['error_code']}: {error_msg}"
+        error_msg = str(action.payload.get('message', 'Error occurred'))
+        error_code = action.payload.get('error_code')
+        if error_code is not None:
+            error_msg = f"{str(error_code)}: {error_msg}"
         return self._build_response(action, error_msg, status="error")
     
     def _handle_redirect(self, action: ResponseAction) -> Dict[str, Any]:
