@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  gulltoppr:
+    image: portdeveloper/gulltoppr:latest
+    container_name: heimdall-gulltoppr
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - heimdall-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  heimdall-network:
+    driver: bridge

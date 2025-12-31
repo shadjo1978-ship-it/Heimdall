@@ -1,0 +1,18 @@
+{
+  "gulltoppr": {
+    "enabled": true,
+    "service_url": "http://localhost:8080",
+    "default_rpc_url": "eth.llamarpc.com",
+    "timeout": 30000,
+    "description": "Gulltoppr is a Rust backend for heimdall-rs, providing EVM smart contract bytecode analysis and ABI generation"
+  },
+  "endpoints": {
+    "health": "/",
+    "generate_abi": "/{contract_address}?rpc_url={rpc_url}"
+  },
+  "features": [
+    "Smart contract ABI generation",
+    "EVM bytecode analysis",
+    "Fast and efficient Rust-based processing"
+  ]
+}
