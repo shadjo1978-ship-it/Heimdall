@@ -1,0 +1,5 @@
+# No dependencies required for basic functionality
+# All features use Python standard library
+
+# Optional: For enhanced logging and formatting
+# pip install colorama  # For colored console output on Windows
