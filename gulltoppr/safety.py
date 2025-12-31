@@ -5,6 +5,8 @@ Implements comprehensive safety checks before action execution
 
 import re
 import logging
+import ipaddress
+from datetime import datetime, timedelta, timezone
 from typing import List, Set, Optional, Dict, Any
 from .actions import ResponseAction, ResponseActionType
 
@@ -128,8 +130,6 @@ class SafetyValidator:
     def _validate_rate_limit(self, action: ResponseAction) -> bool:
         """Validate action doesn't exceed rate limits"""
         # Simple rate limiting: count recent actions in last minute
-        from datetime import datetime, timedelta, timezone
-        
         one_minute_ago = datetime.now(timezone.utc) - timedelta(minutes=1)
         recent_actions = [
             a for a in self.action_history
@@ -250,7 +250,6 @@ class SafetyValidator:
     
     def _is_valid_ip(self, ip_address: str) -> bool:
         """Validate IP address format (simple validation)"""
-        import ipaddress
         try:
             ipaddress.ip_address(ip_address)
             return True
