@@ -1,0 +1,64 @@
+# Application Configuration
+environment: development
+
+# Logging configuration
+logging:
+  level: info
+  format: pretty
+  file: logs/heimdall.log
+
+# Module configuration
+modules:
+  # Storage module
+  storage:
+    enabled: true
+    database:
+      type: memory
+    cache:
+      enabled: true
+      ttl: 300
+
+  # Firewall module
+  firewall:
+    enabled: true
+    rateLimit:
+      maxRequests: 100
+      windowMs: 60000
+    rules:
+      - id: xss-prevention
+        type: pattern
+        pattern: "<script|javascript:|onerror="
+        action: block
+        enabled: true
+    blocklist: []
+    allowlist: []
+
+  # AI module
+  ai:
+    enabled: true
+    provider: openai
+    maxContextLength: 10
+    # Add your API keys in a separate secure file or environment variables
+
+  # Voice module
+  voice:
+    enabled: false
+    stt:
+      provider: whisper
+    tts:
+      provider: coqui
+    wakeWord:
+      enabled: false
+      word: heimdall
+
+  # API module
+  api:
+    enabled: true
+    port: 3000
+    websocket:
+      enabled: true
+      cors:
+        origin: "*"
+        methods:
+          - GET
+          - POST
