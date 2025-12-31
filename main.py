@@ -8,7 +8,6 @@ import logging
 import signal
 import sys
 import time
-from datetime import datetime
 
 from malware_listener import MalwareDetectionListener, MalwareDetection, DetectionSeverity
 from config import Config
