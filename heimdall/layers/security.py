@@ -64,10 +64,21 @@ class SecurityLayer(BaseLayer):
         return threats
     
     def _sanitize(self, data: Any) -> Any:
-        """Sanitize input data"""
+        """
+        Sanitize input data
+        
+        Note: This provides basic HTML entity encoding for display purposes.
+        For production use, integrate a comprehensive sanitization library
+        for protection against SQL injection, XSS, and other attack vectors.
+        """
         if isinstance(data, str):
-            # Basic sanitization - remove potential injection attempts
-            return data.replace('<', '&lt;').replace('>', '&gt;')
+            # Basic HTML entity encoding
+            sanitized = data.replace('&', '&amp;')
+            sanitized = sanitized.replace('<', '&lt;')
+            sanitized = sanitized.replace('>', '&gt;')
+            sanitized = sanitized.replace('"', '&quot;')
+            sanitized = sanitized.replace("'", '&#x27;')
+            return sanitized
         elif isinstance(data, dict):
             return {k: self._sanitize(v) for k, v in data.items()}
         return data

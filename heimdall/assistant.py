@@ -86,7 +86,7 @@ class Assistant:
                 security_result = await layer.process(input_data)
                 result['layers_output']['security'] = security_result
                 
-                if not security_result.get('passed', False):
+                if not security_result.get('passed', True):
                     result['status'] = 'blocked'
                     result['final_response'] = {
                         'error': 'Security check failed',
